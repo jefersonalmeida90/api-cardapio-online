@@ -1,0 +1,121 @@
+# =========================
+# Java / Spring Boot
+# =========================
+
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Spring Boot generated files
+target/
+build/
+out/
+
+# Logs
+logs/
+*.log
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Maven
+# =========================
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Maven wrapper should usually be committed
+!.mvn/wrapper/maven-wrapper.jar
+!mvnw
+!mvnw.cmd
+
+# =========================
+# Gradle
+# =========================
+
+.gradle/
+build/
+
+# Gradle wrapper should usually be committed
+!gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# =========================
+# IDEs
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+*.env
+
+application-local.properties
+application-local.yml
+application-dev-local.properties
+application-dev-local.yml
+
+# Keystores / certificates
+*.jks
+*.p12
+*.pem
+*.key
+*.crt
+
+# =========================
+# OS files
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Docker / temporary files
+# =========================
+
+.tmp/
+temp/
+*.tmp

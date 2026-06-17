@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:cardapio-online;MODE=MSSQLServer;DATABASE_TO_UPPER=false;CASE_INSENSITIVE_IDENTIFIERS=true;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+api:
+  base-url: http://localhost:8080
+
+admin-auth:
+  email: test-admin@cardapioonline.local
+  password: TestAdmin@123
+  jwt-issuer: CardapioOnlineTest
+  jwt-audience: CardapioOnlineAdminTest
+  jwt-secret: test-secret-key-for-jwt-signing-1234567890
+  token-expiration-minutes: 400

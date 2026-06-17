@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: cardapio-online-java
+  datasource:
+    url: ${DB_URL:jdbc:sqlserver://localhost:1433;databaseName=CARDAPIOONLINE_DB;encrypt=true;trustServerCertificate=true}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8080
+
+api:
+  base-url: http://localhost:8080
+
+admin-auth:
+  email: ${ADMIN_EMAIL:admin@cardapioonline.local}
+  password: ${ADMIN_PASSWORD}
+  jwt-issuer: ${JWT_ISSUER:CardapioOnline}
+  jwt-audience: ${JWT_AUDIENCE:CardapioOnlineAdmin}
+  jwt-secret: ${JWT_SECRET}
+  token-expiration-minutes: ${JWT_EXPIRATION_MINUTES:400}
+
+logging:
+  level:
+    org.springframework.security: INFO

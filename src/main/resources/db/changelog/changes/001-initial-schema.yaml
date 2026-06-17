@@ -1,0 +1,597 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-clients
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Clients
+      changes:
+        - createTable:
+            tableName: Clients
+            columns:
+              - column:
+                  name: Id
+                  type: uniqueidentifier
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Name
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Email
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone
+                  type: nvarchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ZipCode
+                  type: nvarchar(9)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Street
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Number
+                  type: nvarchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Neighborhood
+                  type: nvarchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: City
+                  type: nvarchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: State
+                  type: nvarchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Complement
+                  type: nvarchar(100)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PasswordHash
+                  type: nvarchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RegisteredAt
+                  type: date
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 002-create-estabelecimentos
+      author: codex
+      validCheckSum:
+        - 9:1b9f12db18b238497aeff92edbcff029
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Estabelecimentos
+      changes:
+        - createTable:
+            tableName: Estabelecimentos
+            columns:
+              - column:
+                  name: Id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Name
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LogoUrl
+                  type: varchar(5000)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Category
+                  type: nvarchar(50)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Whatsapp
+                  type: nvarchar(20)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: OpenTime
+                  type: time
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CloseTime
+                  type: time
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UpdatedAt
+                  type: datetime2
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 003-create-products
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Products
+      changes:
+        - createTable:
+            tableName: Products
+            columns:
+              - column:
+                  name: Id
+                  type: uniqueidentifier
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Name
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Description
+                  type: nvarchar(1000)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Price
+                  type: decimal(18,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Category
+                  type: nvarchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ImageUrl
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: IsActive
+                  type: bit
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CreatedAt
+                  type: datetime2
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 004-create-orders
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Orders
+      changes:
+        - createTable:
+            tableName: Orders
+            columns:
+              - column:
+                  name: Id
+                  type: uniqueidentifier
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Number
+                  type: nvarchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ClientId
+                  type: uniqueidentifier
+              - column:
+                  name: ClientName
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ClientPhone
+                  type: nvarchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: nvarchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Total
+                  type: decimal(18,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Status
+                  type: nvarchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CreatedAt
+                  type: datetime2
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Source
+                  type: nvarchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Note
+                  type: nvarchar(500)
+
+  - changeSet:
+      id: 005-create-order-items
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: OrderItems
+      changes:
+        - createTable:
+            tableName: OrderItems
+            columns:
+              - column:
+                  name: Id
+                  type: uniqueidentifier
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: OrderId
+                  type: uniqueidentifier
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ProductName
+                  type: nvarchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Quantity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UnitPrice
+                  type: decimal(18,2)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 006-create-integrations
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Integrations
+      changes:
+        - createTable:
+            tableName: Integrations
+            columns:
+              - column:
+                  name: Id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Provider
+                  type: nvarchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Enabled
+                  type: bit
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ClientId
+                  type: nvarchar(200)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ClientSecret
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AccountId
+                  type: nvarchar(200)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ApiKey
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AccessToken
+                  type: nvarchar(1000)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AppSecret
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VerifyToken
+                  type: nvarchar(200)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PhoneNumberId
+                  type: nvarchar(200)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: WebhookUrl
+                  type: nvarchar(1000)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: WebhookSecret
+                  type: nvarchar(500)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AiProvider
+                  type: nvarchar(50)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Model
+                  type: nvarchar(100)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AssistantId
+                  type: nvarchar(200)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UpdatedAt
+                  type: datetime2
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 007-clients-email-unique
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Clients
+            indexName: IX_Clients_Email
+      changes:
+        - createIndex:
+            tableName: Clients
+            indexName: IX_Clients_Email
+            unique: true
+            columns:
+              - column:
+                  name: Email
+
+  - changeSet:
+      id: 008-clients-phone-unique
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Clients
+            indexName: IX_Clients_Phone
+      changes:
+        - createIndex:
+            tableName: Clients
+            indexName: IX_Clients_Phone
+            unique: true
+            columns:
+              - column:
+                  name: Phone
+
+  - changeSet:
+      id: 009-orders-client-index
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Orders
+            indexName: IX_Orders_ClientId
+      changes:
+        - createIndex:
+            tableName: Orders
+            indexName: IX_Orders_ClientId
+            columns:
+              - column:
+                  name: ClientId
+
+  - changeSet:
+      id: 010-orders-date-index
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Orders
+            indexName: IX_Orders_Date
+      changes:
+        - createIndex:
+            tableName: Orders
+            indexName: IX_Orders_Date
+            columns:
+              - column:
+                  name: Date
+
+  - changeSet:
+      id: 011-orders-status-index
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Orders
+            indexName: IX_Orders_Status
+      changes:
+        - createIndex:
+            tableName: Orders
+            indexName: IX_Orders_Status
+            columns:
+              - column:
+                  name: Status
+
+  - changeSet:
+      id: 012-orderitems-orderid-index
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: OrderItems
+            indexName: IX_OrderItems_OrderId
+      changes:
+        - createIndex:
+            tableName: OrderItems
+            indexName: IX_OrderItems_OrderId
+            columns:
+              - column:
+                  name: OrderId
+
+  - changeSet:
+      id: 013-products-isactive-index
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Products
+            indexName: IX_Products_IsActive
+      changes:
+        - createIndex:
+            tableName: Products
+            indexName: IX_Products_IsActive
+            columns:
+              - column:
+                  name: IsActive
+
+  - changeSet:
+      id: 014-integrations-provider-unique
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          indexExists:
+            tableName: Integrations
+            indexName: IX_Integrations_Provider
+      changes:
+        - createIndex:
+            tableName: Integrations
+            indexName: IX_Integrations_Provider
+            unique: true
+            columns:
+              - column:
+                  name: Provider
+
+  - changeSet:
+      id: 015-orders-clients-fk
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          foreignKeyConstraintExists:
+            foreignKeyName: FK_Orders_Clients_ClientId
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: Orders
+            baseColumnNames: ClientId
+            referencedTableName: Clients
+            referencedColumnNames: Id
+            constraintName: FK_Orders_Clients_ClientId
+            onDelete: SET NULL
+
+  - changeSet:
+      id: 016-orderitems-orders-fk
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          foreignKeyConstraintExists:
+            foreignKeyName: FK_OrderItems_Orders_OrderId
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: OrderItems
+            baseColumnNames: OrderId
+            referencedTableName: Orders
+            referencedColumnNames: Id
+            constraintName: FK_OrderItems_Orders_OrderId
+            onDelete: CASCADE

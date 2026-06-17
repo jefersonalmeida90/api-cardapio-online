@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 017-estabelecimentos-logourl-varchar-5000
+      author: codex
+      preConditions:
+        onFail: MARK_RAN
+        tableExists:
+          tableName: Estabelecimentos
+        columnExists:
+          tableName: Estabelecimentos
+          columnName: LogoUrl
+      changes:
+        - sql:
+            dbms: mssql
+            splitStatements: false
+            stripComments: true
+            sql: |
+              DECLARE @constraintName NVARCHAR(128);
+
+              SELECT @constraintName = dc.name
+              FROM sys.default_constraints dc
+              INNER JOIN sys.columns c
+                  ON dc.parent_object_id = c.object_id
+                 AND dc.parent_column_id = c.column_id
+              INNER JOIN sys.tables t
+                  ON c.object_id = t.object_id
+              WHERE t.name = 'Estabelecimentos'
+                AND c.name = 'LogoUrl';
+
+              IF @constraintName IS NOT NULL
+              BEGIN
+                  EXEC('ALTER TABLE dbo.Estabelecimentos DROP CONSTRAINT [' + @constraintName + ']');
+              END;
+
+              ALTER TABLE dbo.Estabelecimentos ALTER COLUMN LogoUrl VARCHAR(5000) NOT NULL;
+
+              IF NOT EXISTS (
+                  SELECT 1
+                  FROM sys.default_constraints dc
+                  INNER JOIN sys.columns c
+                      ON dc.parent_object_id = c.object_id
+                     AND dc.parent_column_id = c.column_id
+                  INNER JOIN sys.tables t
+                      ON c.object_id = t.object_id
+                  WHERE t.name = 'Estabelecimentos'
+                    AND c.name = 'LogoUrl'
+              )
+              BEGIN
+                  ALTER TABLE dbo.Estabelecimentos ADD DEFAULT ('') FOR LogoUrl;
+              END;
